@@ -1,8 +1,14 @@
 import React from 'react'
 import { Route,Routes } from 'react-router-dom'
-import Login from '../components/Login'
-import Signup from '../components/Signup'
+import Login from '../components/user/Login'
+import Signup from '../components/user/Signup'
 import Authentication from '../pages/Authentication'
+import DoctorLogin from '../components/Doctors/DoctorLogin'
+import DoctorSignup from '../components/Doctors/DoctorSignup'
+import Home from '../pages/Home'
+import HomeComponent from '../components/user/homeComponent'
+import Messages from '../pages/Messages'
+import DoctorHome from '../pages/DoctorHome'
 
 function Router() {
   return (
@@ -10,6 +16,16 @@ function Router() {
         <Route path="/" exact element={<Authentication />}>
         <Route index element={<Login/>}/>
         <Route path='/signup' element={<Signup/>}/>
+        <Route path='/doctor-login' element={<DoctorLogin/>}/>
+        <Route path='/doctor-signup' element={<DoctorSignup/>}/>
+        </Route>
+        <Route path='/home' element={<Home/>}>
+          <Route index element={<HomeComponent/>}/>
+          <Route path='/home/message' element={<Messages/>}/>
+        </Route>
+        <Route path='/doctorhome' element={<DoctorHome/>}>
+          {/* <Route index element={<HomeComponent/>}/>
+          <Route path='/home/message' element={<Messages/>}/> */}
         </Route>
     </Routes>
     

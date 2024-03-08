@@ -1,27 +1,28 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-export default function Login() {
+function DoctorLogin() {
     let [email, setemail] = useState("");
     let [password, setPassword] = useState("");
 
     const navigate = useNavigate();
     const submitHander = async (e) => {
         e.preventDefault();
-        // try {
-        //   if ((email, password)) {
-        //     const res = await Login({ email, password }).unwrap();
-        //     toast("Authentication success", 2000);
-        //     let token=res.token
-        //     dispatch(setCredentials({ ...res }));
-        //     localStorage.setItem('token',token)
-        //     navigate("/");
-        //   } else {
-        //     toast.error("Please give a valid input");
-        //   }
-        // } catch (err) {
-        //   toast.error(err?.data.error || err.message, 2000);
-        // }
+        try {
+          if ((email, password)) {
+            const res = await axios.post('http://localhost:3000/api/doctors/login',{ email, password })
+            toast("Authentication success", 2000);
+            let token=res.data.token
+            localStorage.setItem('doctortoken',token)
+            navigate("/doctorhome");
+          } else {
+            toast.error("Please give a valid input");
+          }
+        } catch (err) {
+          toast.error(err?.data.error || err.message, 2000);
+        }
       };
     
 
@@ -29,7 +30,7 @@ export default function Login() {
     <div className=''>
         <div>
           <div className="w-96 bg-white rounded-lg shadow-lg p-6  text-sm">
-            <h1 className="text-3xl font-semibold mb-4 text-center">Login</h1>
+            <h1 className="text-3xl font-semibold mb-4 text-center text-slate-800">Doctor Login</h1>
 
             <form onSubmit={submitHander}>
               <div className="mb-4">
@@ -63,9 +64,16 @@ export default function Login() {
               </button>
               <Link
                 className="block text-gray-500 text-center mb-3 mt-3 text-sm"
-                to="/signup"
+                to="/doctor-signup"
               >
-                Dont have Account?Signup
+                Create a new Doctor Account
+              </Link>
+              <hr className='my-6'/>
+              <Link
+                className="block text-gray-500 text-center mb-3 mt-3 text-sm "
+                to="/"
+              >
+                <span className="font-semibold text-gray-800">User Login</span> 
               </Link>
             </form>
           </div>
@@ -73,3 +81,5 @@ export default function Login() {
       </div>
   )
 }
+
+export default DoctorLogin
