@@ -9,6 +9,11 @@ import Home from '../pages/Home'
 import HomeComponent from '../components/user/homeComponent'
 import Messages from '../pages/Messages'
 import DoctorHome from '../pages/DoctorHome'
+import DoctorHomecomp from '../components/Doctors/DoctorHome'
+import DoctorChat from '../components/Doctors/DoctorChat'
+import DoctorProfile from '../components/Doctors/DoctorProfile'
+import UserProfile from '../components/user/UserProfile'
+import UserDoctorProfile from '../components/user/DoctorProfile'
 
 function Router() {
   return (
@@ -22,10 +27,13 @@ function Router() {
         <Route path='/home' element={<Home/>}>
           <Route index element={<HomeComponent/>}/>
           <Route path='/home/message' element={<Messages/>}/>
+          <Route path='/home/profile' element={<UserProfile/>}/>
+          <Route path='/home/doctor-profile' element={<UserDoctorProfile/>}/>
         </Route>
         <Route path='/doctorhome' element={<DoctorHome/>}>
-          {/* <Route index element={<HomeComponent/>}/>
-          <Route path='/home/message' element={<Messages/>}/> */}
+          <Route index element={<DoctorHomecomp/>}/>
+          <Route path='/doctorhome/message' element={<DoctorChat/>}/>
+          <Route path='/doctorhome/profile' element={<DoctorProfile/>}/>
         </Route>
     </Routes>
     

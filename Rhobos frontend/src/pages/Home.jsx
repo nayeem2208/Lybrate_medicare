@@ -9,10 +9,11 @@ function Home() {
   let navigate=useNavigate()
   useEffect(() => {
     let userData = localStorage.getItem("token");
-    if (!userData) {
+    let parsedToken = JSON.parse(userData);
+    if (!parsedToken) {
         navigate("/");
     }
-    setUserDetails(userData)
+    setUserDetails(parsedToken)
   }, []);
 
   return (

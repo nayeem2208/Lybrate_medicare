@@ -11,23 +11,15 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const storedToken = localStorage.getItem("token");
-  //   if (storedToken) {
-  //     setUserDetails(storedToken);
-  //     navigate("/home");
-  //   }
-  // }, []);
-
   const submitHander = async (e) => {
     e.preventDefault();
     try {
       if ((email, password)) {
         const res = await axios.post('http://localhost:3000/api/login',{ email, password })
         toast("Authentication success", 2000);
-        let token=res.data.token
+        let token=res.data
         setUserDetails(token)
-        localStorage.setItem('token',token)
+        localStorage.setItem('token',JSON.stringify(token))
         navigate("/home");
       } else {
         toast.error("Please give a valid input");
