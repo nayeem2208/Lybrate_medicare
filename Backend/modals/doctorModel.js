@@ -11,7 +11,10 @@ const doctorSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
-    specialization: {
+    phone:{
+      type:String,
+    },
+    specialisation: {
       type: String,
     },
     address: {
@@ -31,6 +34,9 @@ const doctorSchema = mongoose.Schema(
     experience: {
       type: String,
     },
+    hospital:{
+      type:String
+    }
   },
   {
     timestamps: true,

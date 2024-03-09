@@ -5,18 +5,21 @@ import { userState } from "../context/userContext";
 
 function Authentication() {
   let navigate = useNavigate();
-  let { userDetails, setUserDetails,setDoctorDetails } = userState();
+  let { userDetails, setUserDetails, setDoctorDetails } = userState();
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
-    const doctorToken = localStorage.getItem("doctortoken");
+    let parsedToken = JSON.parse(storedToken);
 
-    if (storedToken) {
-      setUserDetails(storedToken);
+    const doctorToken = localStorage.getItem("doctortoken");
+    let docParsedToken = JSON.parse(doctorToken);
+
+    if (parsedToken) {
+      setUserDetails(parsedToken);
       navigate("/home");
     }
-    if(doctorToken){
-      setDoctorDetails(doctorToken)
-      navigate('/doctorhome')
+    if (docParsedToken) {
+      setDoctorDetails(docParsedToken);
+      navigate("/doctorhome");
     }
   }, []);
 

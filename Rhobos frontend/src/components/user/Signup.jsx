@@ -34,9 +34,9 @@ function Signup() {
                     mobile:phone,
                     password,
                   })
-                  let token=res.data.token
+                  let token=res.data
                   setUserDetails(token)
-                  localStorage.setItem('token',token)
+                  localStorage.setItem('token',JSON.stringify(token))
                   navigate('/home')
                     console.log(res,'ressssssssssssssssssssssssssssss')
                 } catch (err) {

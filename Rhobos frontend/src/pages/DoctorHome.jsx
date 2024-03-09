@@ -1,20 +1,21 @@
 import React, { useEffect } from 'react'
 import { userState } from '../context/userContext';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 function DoctorHome() {
     let {setDoctorDetails} = userState();
     let navigate=useNavigate()
     useEffect(() => {
       let doctorData = localStorage.getItem("doctortoken");
-      if (!doctorData) {
+      let parsedToken = JSON.parse(doctorData);
+      if (!parsedToken) {
           navigate("/doctor-login");
       }
-      setDoctorDetails(doctorData)
+      setDoctorDetails(parsedToken)
     }, []);
   return (
     <div>
-      dochome
+       <Outlet/>
     </div>
   )
 }

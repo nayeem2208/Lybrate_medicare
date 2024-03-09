@@ -1,3 +1,4 @@
+import Doctor from "../modals/doctorModel.js";
 import User from "../modals/userModel.js";
 import generateToken from "../utils/generateToken.js";
 
@@ -50,6 +51,29 @@ const userController = {
         .json({ message: "Registration failed", error: error.message });
     }
   },
+  getUserProfile:async(req,res)=>{
+    try {
+      console.log('its here')
+      let id=req.query.id
+      let user=await User.findOne({_id:id})
+      if(!user){
+        res.status(400)
+        throw new error('Invalid request , user is not found')
+      }
+      res.status(200).json(user)
+    } catch (error) {
+      console.log(error)
+      res.status(400).json(error)
+    }
+  },
+  getDoctors:async(req,res)=>{
+    try {
+      let doctors=await Doctor.find({})
+      res.status(200).json(doctors)
+    } catch (error) {
+      res.status(400).json(error)
+    }
+  }
 };
 
 export default userController;
